@@ -23,6 +23,9 @@ WORKDIR /var/www/html
 # Copy project files
 COPY . .
 
+# Create .env from example so artisan commands work at build and runtime
+RUN cp .env.example .env
+
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev --ignore-platform-req=ext-grpc
 
