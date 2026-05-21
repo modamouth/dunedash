@@ -1,8 +1,15 @@
 #!/bin/bash
 set -e
 
-# Generate app key if not set
-php artisan key:generate --force
+# Railway/Docker: no .env file exists — create one from example so artisan can boot
+if [ ! -f .env ]; then
+    cp .env.example .env
+fi
+
+# Only generate key if APP_KEY isn't already injected as an env var
+if [ -z "$APP_KEY" ]; then
+    php artisan key:generate --force
+fi
 
 # Run migrations
 php artisan migrate --force
