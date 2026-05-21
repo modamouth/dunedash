@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 # Run migrations with error handling
 php artisan migrate --force 2>&1 || {
