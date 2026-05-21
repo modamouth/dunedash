@@ -12,10 +12,5 @@ php artisan db:seed --force 2>/dev/null || true
 # Storage symlink
 php artisan storage:link 2>/dev/null || true
 
-# Cache config, routes, views for performance
-php artisan config:cache 2>/dev/null || true
-php artisan route:cache 2>/dev/null || true
-php artisan view:cache 2>/dev/null || true
-
 # Start Apache
 exec apache2-foreground

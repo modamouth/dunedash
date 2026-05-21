@@ -32,6 +32,11 @@ RUN composer install --optimize-autoloader --no-dev --ignore-platform-req=ext-gr
 # Build frontend assets
 RUN npm install && npm run production 2>/dev/null || true
 
+# Cache config, routes and views at build time
+RUN php artisan config:cache \
+    && php artisan route:cache \
+    && php artisan view:cache
+
 # Permissions
 RUN chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
